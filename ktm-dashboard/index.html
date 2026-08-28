@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KTM Kebun Tebu Mas — Data Tebu MBS</title>
+<style>
+:root{--green:#087443;--green2:#0c9a58;--gold:#f0b429;--bg:#f4f7f5;--text:#16332a;--muted:#64756e;--white:#fff;--danger:#c62828;--line:#dce7e1}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,#075c35,#0b9b59);color:#fff;padding:18px 20px;position:sticky;top:0;z-index:10;box-shadow:0 3px 14px #0002}
+.brand{display:flex;align-items:center;gap:12px;max-width:1200px;margin:auto}.logo{width:54px;height:54px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:16px;line-height:.85;text-align:center;background:#075c35}.brand h1{font-size:20px;margin:0}.brand p{margin:3px 0 0;font-size:12px;opacity:.9}
+main{max-width:1200px;margin:auto;padding:18px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 4px 15px #073c2410}.stat b{font-size:28px;display:block;color:var(--green)}.stat span{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.tab{border:0;border-radius:10px;padding:11px 15px;background:#dfeae5;color:var(--text);font-weight:700;cursor:pointer}.tab.active{background:var(--green);color:#fff}
+.panel{display:none}.panel.active{display:block}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input{width:100%;padding:11px 12px;margin-top:6px;border:1px solid #cddbd5;border-radius:10px;font-size:14px;background:#fff}input:focus{outline:2px solid #0c9a5833;border-color:var(--green)}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:7px}.photoBox{border:1px dashed #a9beb4;border-radius:12px;min-height:130px;display:grid;place-items:center;overflow:hidden;background:#f8fbf9;position:relative}.photoBox img{width:100%;height:130px;object-fit:cover}.photoBox span{font-size:12px;color:var(--muted);text-align:center;padding:8px}
+button.primary{border:0;background:var(--green);color:#fff;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer}.secondary{border:1px solid var(--green);color:var(--green);background:#fff;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer}.danger{border:0;background:#fde9e9;color:var(--danger);padding:10px 13px;border-radius:9px;font-weight:700;cursor:pointer}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}.tableWrap{overflow:auto}.tableWrap table{min-width:900px}th,td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;text-align:left}th{background:#edf5f0;color:#24513f}.thumbs{display:flex;gap:4px}.thumbs img{width:52px;height:42px;object-fit:cover;border-radius:6px}.badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#fff1c7;color:#765400;font-weight:800;font-size:11px}.progress{height:8px;background:#e4ece8;border-radius:20px;overflow:hidden;margin-top:6px}.progress i{display:block;height:100%;background:var(--gold)}
+.notice{background:#fff8df;border:1px solid #f2d783;padding:12px;border-radius:12px;margin-bottom:14px;font-size:13px}.empty{text-align:center;color:var(--muted);padding:35px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}form{grid-template-columns:1fr}.full{grid-column:auto}.photos{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.photos{grid-template-columns:1fr 1fr!important}.brand h1{font-size:16px}.logo{width:46px;height:46px}.photos{grid-template-columns:1fr}}
+.thumbs img{display:block;object-fit:cover}.photoBox img{display:block;max-width:100%;height:130px;object-fit:cover}
+</style>
+<style>
+#loginScreen{position:fixed;inset:0;background:linear-gradient(135deg,#075c35,#0b9b59);display:grid;place-items:center;z-index:9999;padding:20px}
+.loginCard{width:min(420px,100%);background:#fff;border-radius:20px;padding:28px;box-shadow:0 15px 50px #0004}
+.loginLogo{width:70px;height:70px;border-radius:50%;background:#075c35;color:#fff;border:3px solid #0b9b59;display:grid;place-items:center;text-align:center;font-weight:900;margin:0 auto 14px}
+.loginCard h2{text-align:center;margin:8px 0 4px;color:#16332a}.loginCard p{text-align:center;color:#64756e;font-size:13px}
+.loginCard input{margin-bottom:10px}.loginErr{color:#c62828;font-size:13px;text-align:center;min-height:18px}
+.userBar{display:flex;align-items:center;gap:8px;margin-left:auto}.userName{font-size:12px;font-weight:700}
+.logoutBtn{border:1px solid #ffffff99;background:#ffffff1c;color:#fff;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}
+</style></head>
+<body><div id="loginScreen"><div class="loginCard">
+<div class="loginLogo">KTM<br><small>KEBUN</small></div>
+<h2>KTM KEBUN TEBU MAS</h2><p>Login dengan akun dan sandi masing-masing</p>
+<input id="loginUser" autocomplete="username" placeholder="Nama pengguna">
+<input id="loginPass" type="password" autocomplete="current-password" placeholder="Kata sandi">
+<button class="primary" id="loginBtn" style="width:100%;margin-top:5px">Masuk</button>
+<div class="loginErr" id="loginErr"></div>
+<p style="margin-top:16px;font-size:11px">Akun awal: admin / admin123</p>
+</div></div>
+<header><div class="brand"><div class="logo">KTM<br><small style="font-size:7px">KEBUN</small></div><div><h1>KTM KEBUN TEBU MAS</h1><p>Sistem Data Pengiriman Tebu MBS • Manis Bersih Segar</p></div><div class="userBar"><span class="userName" id="loggedUser"></span><button class="logoutBtn" id="logoutBtn">Keluar</button></div></div></header>
+
+<main>
+<div class="notice"><b>Penyimpanan:</b> Data dan foto disimpan di browser menggunakan penyimpanan lokal + IndexedDB. Gunakan <b>Backup JSON</b> secara berkala agar data aman saat pindah perangkat/browser. &nbsp; <b>Akses akun:</b> Setiap akun memiliki data terpisah pada perangkat/browser ini. Untuk akses lintas perangkat secara online diperlukan database/server. &nbsp; <b>Program MBS:</b> setiap sopir yang mencapai <b>5 kali pengiriman MBS</b> mendapat <b>gula 1 kg</b>. Setiap kelipatan 5 pengiriman berikutnya mendapat tambahan 1 kg lagi.</div>
+
+<section class="grid">
+<div class="card stat"><b id="totalDrivers">0</b><span>Total Sopir</span></div>
+<div class="card stat"><b id="totalTrips">0</b><span>Total Pengiriman MBS</span></div>
+<div class="card stat"><b id="totalSugar">0 kg</b><span>Total Bonus Gula</span></div>
+<div class="card stat"><b id="eligible">0</b><span>Sopir Mencapai Bonus</span></div>
+</section>
+
+<div class="tabs">
+<button class="tab active" data-tab="dash">📊 Dasbor</button>
+<button class="tab" data-tab="add">➕ Tambah Pengiriman</button>
+<button class="tab" data-tab="data">🚚 Data Pengiriman</button>
+</div>
+
+<section id="dash" class="panel active">
+<div class="card" style="margin-bottom:14px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+<strong>📌 Status data: <span id="saveStatus">siap</span></strong>
+<button class="secondary" type="button" id="refreshDash">🔄 Segarkan Dasbor</button>
+</div>
+</div>
+<div class="card" style="margin-bottom:14px">
+<h3>🎁 Sopir Otomatis Mendapat Bonus Gula 1 KG</h3>
+<p style="color:#64756e;font-size:13px;margin-top:-4px">Nama akan otomatis muncul ketika jumlah pengiriman mencapai 5, 10, 15, 20, dan seterusnya. Setiap kelipatan 5 mendapat bonus 1 kg.</p>
+<div id="bonusDrivers" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:12px"></div>
+</div>
+<div class="card"><h3>Ringkasan Sopir</h3><div class="tableWrap"><table><thead><tr><th>Sopir</th><th>Nopol</th><th>Pengiriman</th><th>Progress Bonus</th><th>Gula Didapat</th></tr></thead><tbody id="driverSummary"></tbody></table></div></div>
+</section>
+
+<section id="add" class="panel">
+<div class="card"><h3>Tambah Data Pengiriman MBS</h3>
+<form id="entryForm">
+<div><label>Nama Sopir<input id="driver" required placeholder="Contoh: Budi"></label></div>
+<div><label>Nopol Kendaraan<input id="plate" required placeholder="Contoh: S 1234 AB"></label></div>
+<div><label>Nama Mitra<input id="partner" required placeholder="Contoh: Mitra Tebu Jaya"></label></div>
+<div><label>TTA / Nomor TTA<input id="tta" required placeholder="Contoh: TTA-000123"></label></div>
+<div class="full"><label>4 Foto Kendaraan / Dokumen (ambil dari galeri)<input id="photos" type="file" accept="image/*" multiple></label>
+<div class="photos" style="grid-template-columns:repeat(4,1fr)">
+<div class="photoBox" id="p1"><span>Foto 1</span></div>
+<div class="photoBox" id="p2"><span>Foto 2</span></div>
+<div class="photoBox" id="p3"><span>Foto 3</span></div>
+<div class="photoBox" id="p4"><span>Foto 4</span></div>
+</div></div>
+<div class="full actions"><button class="primary" type="submit">Simpan Pengiriman</button><button class="secondary" type="button" id="clearForm">Bersihkan</button></div>
+</form></div>
+</section>
+
+<section id="data" class="panel">
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h3>Data Pengiriman</h3><div class="actions"><button class="secondary" id="exportXls">⬇ Simpan Excel (.xls)</button><button class="secondary" id="backup">💾 Backup JSON</button><label class="secondary" style="display:inline-block;cursor:pointer">↥ Import JSON<input id="importFile" type="file" accept=".json" style="display:none"></label></div></div>
+<div class="tableWrap"><table><thead><tr><th>#</th><th>Tanggal</th><th>Sopir</th><th>Nopol</th><th>Mitra</th><th>TTA</th><th>Foto</th><th>Aksi</th></tr></thead><tbody id="dataBody"></tbody></table></div></div>
+</section>
+</main>
+
+<script>
+const USER_KEY='ktm_mbs_users_v2';
+const SESSION_KEY='ktm_mbs_session_v2';
+let users=JSON.parse(localStorage.getItem(USER_KEY)||'null');
+if(!users){
+ users=[{username:'admin',password:'admin123',role:'admin'},{username:'operator1',password:'123456',role:'user'},{username:'operator2',password:'123456',role:'user'}];
+ localStorage.setItem(USER_KEY,JSON.stringify(users));
+}
+let currentUser=null,data=[],selectedPhotos=[];
+function dataKey(){return 'ktm_mbs_data_v2_'+currentUser.username.toLowerCase();}
+function legacyDataKeys(){
+  const u=currentUser.username.toLowerCase();
+  return ['ktm_mbs_data_v2_'+u,'ktm_mbs_data_'+u,'ktm_mbs_data_v1_'+u];
+}
+const DB_NAME='KTM_MBS_DATABASE_V3', DB_STORE='usersData';
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const r=indexedDB.open(DB_NAME,1);
+    r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(DB_STORE))r.result.createObjectStore(DB_STORE)};
+    r.onsuccess=()=>resolve(r.result); r.onerror=()=>reject(r.error);
+  });
+}
+async function dbSave(key,value){
+  try{const db=await openDB(); await new Promise((res,rej)=>{
+    const tx=db.transaction(DB_STORE,'readwrite'); tx.objectStore(DB_STORE).put(value,key);
+    tx.oncomplete=res; tx.onerror=()=>rej(tx.error);
+  }); db.close(); return true;}catch(e){return false;}
+}
+async function dbLoad(key){
+  try{const db=await openDB(); const value=await new Promise((res,rej)=>{
+    const tx=db.transaction(DB_STORE,'readonly'); const q=tx.objectStore(DB_STORE).get(key);
+    q.onsuccess=()=>res(q.result); q.onerror=()=>rej(q.error);
+  }); db.close(); return value;}catch(e){return null;}
+}
+
+async function save(){
+  const key=dataKey();
+  const snapshot=JSON.parse(JSON.stringify(data));
+  localStorage.setItem(key,JSON.stringify(snapshot));
+  const ok=await dbSave(key,snapshot);
+  render();
+  if($('saveStatus')) $('saveStatus').textContent=ok?'tersimpan':'tersimpan di browser';
+}
+async function loadUserData(){
+  const key=dataKey();
+  let stored=await dbLoad(key);
+  if(!Array.isArray(stored)){
+    for(const k of legacyDataKeys()){
+      try{
+        const v=JSON.parse(localStorage.getItem(k)||'null');
+        if(Array.isArray(v)){stored=v;break;}
+      }catch(e){}
+    }
+  }
+  if(!Array.isArray(stored)) stored=[];
+  data=stored;
+  localStorage.setItem(key,JSON.stringify(data));
+  await dbSave(key,data);
+  render();
+}
+async function showApp(){loginScreen.style.display='none';loggedUser.textContent='👤 '+currentUser.username;await loadUserData();}
+function doLogin(){
+ const u=loginUser.value.trim(),p=loginPass.value,found=users.find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);
+ if(!found){loginErr.textContent='Nama pengguna atau kata sandi salah.';return;}
+ currentUser=found;sessionStorage.setItem(SESSION_KEY,JSON.stringify({username:found.username}));loginErr.textContent='';showApp();
+}
+loginBtn.onclick=doLogin;loginPass.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+logoutBtn.onclick=()=>{sessionStorage.removeItem(SESSION_KEY);currentUser=null;data=[];loginScreen.style.display='grid';loginUser.value='';loginPass.value='';};
+const ss=JSON.parse(sessionStorage.getItem(SESSION_KEY)||'null');if(ss){const f=users.find(u=>u.username===ss.username);if(f){currentUser=f;showApp();}}
+
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function driverStats(){
+ const map={};
+ data.forEach(x=>{let k=x.driver.trim().toLowerCase();if(!map[k])map[k]={driver:x.driver,plate:x.plate,trips:0};map[k].trips++;map[k].plate=x.plate});
+ return Object.values(map);
+}
+function render(){
+ const stats=driverStats(), trips=data.length, sugar=stats.reduce((a,s)=>a+Math.floor(s.trips/5),0);
+ $('totalDrivers').textContent=stats.length;$('totalTrips').textContent=trips;$('totalSugar').textContent=sugar+' kg';$('eligible').textContent=stats.filter(s=>s.trips>=5).length;
+ $('bonusDrivers').innerHTML=stats.filter(s=>s.trips>=5).length?stats.filter(s=>s.trips>=5).sort((a,b)=>b.trips-a.trips).map(s=>{
+   const bonus=Math.floor(s.trips/5), kg=bonus*5;
+   return `<div class="card" style="border-left:5px solid var(--gold)"><b style="font-size:17px">${esc(s.driver)}</b><div style="font-size:12px;color:var(--muted);margin-top:4px">${esc(s.plate)}</div><div style="margin-top:9px"><span class="badge">🎁 ${bonus}x bonus • ${kg} kg gula</span></div></div>`
+ }).join(''):'<div class="empty" style="grid-column:1/-1">Belum ada sopir yang mencapai 5 kali pengiriman MBS.</div>';
+ $('driverSummary').innerHTML=stats.length?stats.sort((a,b)=>b.trips-a.trips).map(s=>{
+   const rem=s.trips%5, pct=rem?rem/5*100:100, kg=Math.floor(s.trips/5);
+   return `<tr><td><b>${esc(s.driver)}</b></td><td>${esc(s.plate)}</td><td>${s.trips}</td><td><div>${rem===0&&s.trips>0?'<span class="badge">Bonus siap/tercapai</span>':`${rem}/5`}</div><div class="progress"><i style="width:${pct}%"></i></div></td><td><b>${kg} kg</b></td></tr>`
+ }).join(''):'<tr><td colspan="5" class="empty">Belum ada data pengiriman.</td></tr>';
+ $('dataBody').innerHTML=data.length?data.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.date)}</td><td>${esc(x.driver)}</td><td>${esc(x.plate)}</td><td>${esc(x.partner)}</td><td>${esc(x.tta)}</td><td><div class="thumbs">${(x.photos||[]).map((p,j)=>`<img src="${p}" alt="Foto ${j+1}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Foto gagal dimuat',style:'font-size:10px;color:#c62828'}))">`).join('')}</div></td><td><button class="danger" onclick="del(${i})">Hapus</button></td></tr>`).join(''):'<tr><td colspan="8" class="empty">Belum ada data.</td></tr>';
+}
+function del(i){if(confirm('Hapus data pengiriman ini?')){data.splice(i,1);save();}}
+window.del=del;
+
+$('refreshDash').onclick=async()=>{await loadUserData();};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active');});
+
+$('photos').addEventListener('change',e=>{
+ selectedPhotos=[...e.target.files].slice(0,4);
+ ['p1','p2','p3','p4'].forEach((id,i)=>$(id).innerHTML='<span>Memuat foto...</span>');
+ selectedPhotos.forEach((file,i)=>{
+  const r=new FileReader();
+  r.onload=()=>$(['p1','p2','p3','p4'][i]).innerHTML=`<img src="${r.result}" alt="Foto ${i+1}">`;
+  r.onerror=()=>$(['p1','p2','p3','p4'][i]).innerHTML='<span>Foto gagal dibaca</span>';
+  r.readAsDataURL(file);
+ });
+});
+function fileToDataURL(f){
+ return new Promise((res,rej)=>{
+  const img=new Image(),r=new FileReader();
+  r.onload=()=>{
+   img.onload=()=>{
+    const max=1600,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+    const c=document.createElement('canvas');
+    c.width=Math.max(1,Math.round(img.naturalWidth*scale));
+    c.height=Math.max(1,Math.round(img.naturalHeight*scale));
+    const ctx=c.getContext('2d');
+    ctx.drawImage(img,0,0,c.width,c.height);
+    res(c.toDataURL('image/jpeg',0.82));
+   };
+   img.onerror=()=>rej(new Error('Foto tidak dapat dibaca'));
+   img.src=r.result;
+  };
+  r.onerror=rej;r.readAsDataURL(f);
+ });
+}
+$('entryForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(selectedPhotos.length<1){alert('Mohon pilih minimal 1 foto dari galeri.');return}
+ const photos=await Promise.all(selectedPhotos.map(fileToDataURL));
+ data.push({date:new Date().toLocaleString('id-ID'),driver:$('driver').value.trim(),plate:$('plate').value.trim().toUpperCase(),partner:$('partner').value.trim(),tta:$('tta').value.trim(),photos});
+ save();alert('Data pengiriman MBS berhasil disimpan.');clearForm();
+});
+function clearForm(){$('entryForm').reset();selectedPhotos=[];['p1','p2','p3','p4'].forEach((id,i)=>$(id).innerHTML='<span>Foto '+(i+1)+'</span>')}
+$('clearForm').onclick=clearForm;
+
+$('exportXls').onclick=()=>{
+ let rows=data.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.date)}</td><td>${esc(x.driver)}</td><td>${esc(x.plate)}</td><td>${esc(x.partner)}</td><td>${esc(x.tta)}</td><td>${x.photos.length} foto</td></tr>`).join('');
+ let summary=driverStats().map(s=>`<tr><td>${esc(s.driver)}</td><td>${esc(s.plate)}</td><td>${s.trips}</td><td>${Math.floor(s.trips/5)} kg</td></tr>`).join('');
+ let xml=`<html><head><meta charset="UTF-8"></head><body><h2>KTM KEBUN TEBU MAS - DATA PENGIRIMAN TEBU MBS</h2><h3>Ringkasan Sopir</h3><table border="1"><tr><th>Nama Sopir</th><th>Nopol</th><th>Total Pengiriman</th><th>Bonus Gula</th></tr>${summary}</table><h3>Data Pengiriman</h3><table border="1"><tr><th>No</th><th>Tanggal</th><th>Nama Sopir</th><th>Nopol</th><th>Nama Mitra</th><th>TTA</th><th>Foto</th></tr>${rows}</table></body></html>`;
+ let blob=new Blob(['\ufeff',xml],{type:'application/vnd.ms-excel'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data_tebu_MBS_KTM.xls';a.click();URL.revokeObjectURL(a.href);
+};
+$('backup').onclick=()=>{
+  const payload={version:3,app:'KTM Kebun Tebu Mas',username:currentUser.username,exportedAt:new Date().toISOString(),data};
+  let blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  let a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='backup_data_MBS_KTM_'+currentUser.username+'.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+};
+$('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const v=JSON.parse(r.result); const imported=Array.isArray(v)?v:v.data;
+if(!Array.isArray(imported))throw 0; data=imported; save(); alert('Backup berhasil diimpor dan foto siap ditampilkan.')}catch{alert('File backup tidak valid.')}};r.readAsText(f)});
+
+if(currentUser) render();
+</script>
+</body>
+</html>
